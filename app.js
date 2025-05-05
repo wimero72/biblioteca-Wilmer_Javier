@@ -9,6 +9,7 @@ const autoresRoutes = require('./routes/autoresRoutes');
 const editorialesRoutes = require('./routes/editorialesRoutes');
 const prestamosRoutes = require('./routes/prestamosRoutes');
 const empleadosRoutes = require('./routes/empleadosRoutes');
+const queryPrestamosMayoresUnMesRoutes=require('./routes/queryPrestamosMayoresUnMesRoutes');
 
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
@@ -20,6 +21,7 @@ app.use('/libros', librosRoutes);
 app.use('/autores', autoresRoutes);
 app.use('/editoriales', editorialesRoutes);
 app.use('/prestamos', prestamosRoutes);
+app.use('/prestamos/querys', queryPrestamosMayoresUnMesRoutes);
 app.use('/empleados', empleadosRoutes);
 
 app.listen(3000, () => {

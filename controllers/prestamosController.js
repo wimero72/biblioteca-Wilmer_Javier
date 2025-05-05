@@ -124,14 +124,15 @@ exports.editarPrestamo = async (req, res) => {
 // Consulta Prestamo libros morosos +1mes
 exports.getPrestamosLibrosMoraMasdeUnMes = async (req, res) => {
   const [libros] = await pool.query(`
-    SELECT prestamos.id, libros.titulo, prestamos.fecha_prestamo 
+    SELECT usuarios. nombre, prestamos.id, libros.titulo, prestamos.fecha_prestamo 
     FROM Prestamos
+    JOIN usuarios on prestamos.usuario_id= usuarios.id
     JOIN Libros ON prestamos.libro_id = libros.id
     WHERE prestamos.fecha_devolucion is null
-    ORDER BY prestamos.fecha_prestamo ASC;
+    ORDER BY prestamos.fecha_prestamo DESC;
   `);
-
+  const [usuarios] = await pool.query('SELECT * FROM usuarios');
   const [prestamos] = await pool.query('SELECT * FROM prestamos');
 
-  res.render('libros', { libros, prestamos });
+  res.render('libros', { libros, prestamos, usuarios });
 };

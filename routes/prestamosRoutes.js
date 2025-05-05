@@ -9,5 +9,6 @@ router.post('/editar/:id', prestamosController.editarPrestamo);
 router.get('/devolver/:id', prestamosController.devolverPrestamo);
 router.get('/borrar/:id', prestamosController.deletePrestamo);
 router.get('/editar/:id', prestamosController.mostrarEditar);
+router.get('/query', prestamosController.getPrestamosLibrosMoraMasdeUnMes);
 
 module.exports = router;

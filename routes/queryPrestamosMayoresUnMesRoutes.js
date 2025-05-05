@@ -3,6 +3,6 @@ const router = express.Router();
 const empleadosController = require('../controllers/prestamosController');
 
 // Consulta Prestamo libros morosos +1mes
-router.get('/', prestamosController.getPrestamosLibrosMoraMasdeUnMes);
+router.get('/query', prestamosController.getPrestamosLibrosMoraMasdeUnMes);
 
 module.exports = router;
