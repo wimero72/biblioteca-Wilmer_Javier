@@ -120,3 +120,18 @@ exports.editarPrestamo = async (req, res) => {
     res.send('Error al actualizar préstamo');
   }
 };
+
+// Consulta Prestamo libros morosos +1mes
+exports.getPrestamosLibrosMoraMasdeUnMes = async (req, res) => {
+  const [libros] = await pool.query(`
+    SELECT prestamos.id, libros.titulo, prestamos.fecha_prestamo 
+    FROM Prestamos
+    JOIN Libros ON prestamos.libro_id = libros.id
+    WHERE prestamos.fecha_devolucion is null
+    ORDER BY prestamos.fecha_prestamo ASC;
+  `);
+
+  const [prestamos] = await pool.query('SELECT * FROM prestamos');
+
+  res.render('libros', { libros, prestamos });
+};
